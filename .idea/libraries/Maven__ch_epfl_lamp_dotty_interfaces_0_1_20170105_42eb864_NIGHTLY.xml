@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: ch.epfl.lamp:dotty-interfaces:0.1-20170105-42eb864-NIGHTLY">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/ch/epfl/lamp/dotty-interfaces/0.1-20170105-42eb864-NIGHTLY/dotty-interfaces-0.1-20170105-42eb864-NIGHTLY.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/ch/epfl/lamp/dotty-interfaces/0.1-20170105-42eb864-NIGHTLY/dotty-interfaces-0.1-20170105-42eb864-NIGHTLY-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/ch/epfl/lamp/dotty-interfaces/0.1-20170105-42eb864-NIGHTLY/dotty-interfaces-0.1-20170105-42eb864-NIGHTLY-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
