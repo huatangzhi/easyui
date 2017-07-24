@@ -83,7 +83,7 @@ public void testWebDelete() throws Exception {
 @Test
 public void testWebAdd() throws Exception {
     WebInfo webInfo = new WebInfo();
-    webInfo.setWebId(11112);
+    webInfo.setWebId(11111);
     webInfo.setWebName("111111");
     webInfo.setDomainName("chd");
     webInfo.setIpAdress("www.chd.edu.cn");
@@ -102,13 +102,13 @@ public void testWebAdd() throws Exception {
     webInfo.setIndexOfTeach("1111");
     webInfo.setPriority("11");
     webInfo.setStatue("111");
-    webInfo.setCloseTime(new Date(System.currentTimeMillis()));
+    webInfo.setCloseTime("111");
     webInfo.setCloseReason("111");
-    webInfo.setOpenTime(new Date(System.currentTimeMillis()));
+    webInfo.setOpenTime("111");
     webInfo.setRemark("1111");
     webInfo.setRecordNum("111");
     webInfo.setInRecord("111");
-    webInfo.setRecordDate(new Date(System.currentTimeMillis()));
+    webInfo.setRecordDate("111");
     webInfo.setIsOpen("yes");
     webInfo.setWebApplyNum("123456");
     webInfo.setIsDisconnect("yes");

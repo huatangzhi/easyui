@@ -1,8 +1,42 @@
 <!DOCTYPE html>
-<html>
+
+<style>
+    html,
+    body {
+        margin:0;
+        padding:0;
+        height:100%;
+    }
+    #container{
+        min-height:100%;
+        position:relative;
+    }
+    #header {
+        background:#ff0;
+        padding:10px;
+    }
+    #body {
+        padding:10px;
+        padding-bottom:60px;   /* Height of the footer */
+    }
+    #footer {
+        position: absolute;
+        bottom:0;
+        width:100%;
+        background: #0066ff; width: 100%; height:130px;line-height:130px; text-align:center;
+        font-size: medium;
+    }
+    #dg{
+        background: #0066ff;
+    }
+</style>
+<html xmlns:vertical-align="http://www.w3.org/1999/xhtml">
+
+
+<div id=container">
 <head>
     <meta charset="UTF-8">
-    <title>信息管理</title>
+    <title>网站管理</title>
     <link rel="stylesheet" type="text/css" href="jquery-easyui-1.5/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="jquery-easyui-1.5/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="jquery-easyui-1.5/demo/demo.css">
@@ -12,12 +46,13 @@
 
     <script>
         var url;
-        function deleteUser() {
+        function deleteWeb() {
             var row = $('#dg').datagrid('getSelected');
+//            alert(row.webId);
             if (row) {
                 $.messager.confirm("系统提示", "您确定要删除这条记录吗?", function (r) {
                     if (r) {
-                        $.post('userDelete', {delId: row.id}, function (result) {
+                        $.post('webDelete', {delId: row.webId}, function (result) {
                             if (result.success) {
                                 $.messager.alert("系统提示", "已成功删除这条记录!");
                                 $("#dg").datagrid("reload");
@@ -31,7 +66,7 @@
         }
 
         function newUser() {
-            $("#dlg").dialog('open').dialog('setTitle', '添加用户');
+            $("#dlg").dialog('open').dialog('setTitle', '添加网站');
             $('#fm').form('clear');
             url = 'webSave';
         }
@@ -40,9 +75,9 @@
         function editUser() {
             var row = $('#dg').datagrid('getSelected');
             if (row) {
-                $("#dlg").dialog('open').dialog('setTitle', '编辑用户');
+                $("#dlg").dialog('open').dialog('setTitle', '编辑网站');
                 $('#fm').form('load', row);
-                url = 'userSave?id=' + row.id;
+                url = 'webModify?id=' + row.webId;
             }
         }
 
@@ -89,11 +124,10 @@
             });
         }
     </script>
-
 </head>
 
-<body>
-<table id="dg" title="网站登记表" pageSize=20 class="easyui-datagrid" style="margin:0 auto;"
+<body >
+<table id="dg" title="网站登记表" pageSize=20 class="easyui-datagrid" style="margin:0 ; background:"
        url="webList"
        toolbar="#toolbar" pagination="true"
        rownumbers="true" fitColumns="true" singleSelect="true">
@@ -115,7 +149,7 @@
         <th field="qq"  >QQ</th>
         <th field="category"  >类型（站群，非站群）</th>
         <th field="classification" >分类（部门网站，精品课程，教学团队，会议，信息系统，资源共享课，双语教学，其它）</th>
-        <th field="indexOfTech"  >教学类网站</th>
+        <th field="indexOfTeach"  >教学类网站</th>
         <th field="priority" >系统重要性</th>
         <th field="statue"  >状态</th>
         <th field="closeTime"  >关闭时间</th>
@@ -137,6 +171,10 @@
     </thead>
 </table>
 
+<script>
+</script>
+
+
 <div id="toolbar">
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
        onclick="newUser()">添加记录</a>
@@ -144,11 +182,12 @@
        onclick="editUser()">编辑记录</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
        onclick="deleteWeb()">删除记录</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" plain="true"
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon" plain="true"
        onclick="getAll()">获取全部</a>
+    <a href="http://ids.chd.edu.cn/authserver/login?service=http://202.117.64.170:10934" class="easyui-linkbutton" iconCls="icon-reload" plain="true">退出登录</a>
 </div>
 
-<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding:10px 20px"
+<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding:10px 20px;"
      closed="true" buttons="#dlg-buttons">
     <form id="fm" method="post">
         <table cellspacing="10px;">
@@ -172,147 +211,154 @@
             </tr>
             <tr>
                 <td>部门序号：</td>
-                <td><input name="departId" class="easyui-validatebox" validType="" required="true"
+                <td><input name="departId" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>所属部门：</td>
-                <td><input name="departIndex" class="easyui-validatebox" validType="" required="true"
-                           style="width: 200px;"></td>
+
+                <td><select class="easyui-combotree" url="data" name="departIndex" style="width:200px;"/></td>
+                <!--<td><input name="departIndex" class="easyui-validatebox" validType=""-->
+                           <!--style="width: 200px;"></td>-->
             </tr>
             <tr>
                 <td>系别：</td>
-                <td><input name="department" class="easyui-validatebox" validType="" required="true"
+                <td><input name="department" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>负责人：</td>
-                <td><input name="charge" class="easyui-validatebox" validType="" required="true"
+                <td><input name="charge" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>联系方式：</td>
-                <td><input name="chargeTel" class="easyui-validatebox" validType="" required="true"
+                <td><input name="chargeTel" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>系统管理员：</td>
-                <td><input name="administor" class="easyui-validatebox" validType="" required="true"
+                <td><input name="administor" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>办公室电话：</td>
-                <td><input name="houseTel" class="easyui-validatebox" validType="" required="true"
-                           style="width: 200px;"></td>
-            </tr>
-            <tr>
-                <td>邮箱：</td>
-                <td><input name="email" class="easyui-validatebox" validType="" required="true"
+                <td><input name="houseTel" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>手机：</td>
-                <td><input name="mobilePhone" class="easyui-validatebox" validType="" required="true"
+                <td><input name="mobilePhone" class="easyui-validatebox" validType=""
+                           style="width: 200px;"></td>
+            </tr>
+            <tr>
+                <td>邮箱：</td>
+                <td><input name="email" class="easyui-validatebox" validType="email"
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>QQ：</td>
-                <td><input name="qq" class="easyui-validatebox" validType="" required="true"
+                <td><input name="qq" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>类型（站群，非站群）：</td>
-                <td><input name="category" class="easyui-validatebox" validType="" required="true"
+                <td><input name="category" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>分类（部门网站，精品课程，教学团队，会议，信息系统，资源共享课，双语教学，其它）：</td>
-                <td><input name="classification" class="easyui-validatebox" validType="" required="true"
+                <td><input name="classification" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>教学类网站：</td>
-                <td><input name="indexOfTech" class="easyui-validatebox" validType="" required="true"
+                <td><input name="indexOfTeach" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>系统重要性：</td>
-                <td><input name="priority" class="easyui-validatebox" validType="" required="true"
+                <td><input name="priority" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>状态：</td>
-                <td><input name="statue" class="easyui-validatebox" validType="" required="true"
+                <td><input name="statue" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>关闭时间：</td>
-                <td><input name="closeTime" class="easyui-validatebox" validType="" required="true"
+                <td><input name="closeTime" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>关闭原因：</td>
-                <td><input name="closeReason" class="easyui-validatebox" validType="" required="true"
+                <td><input name="closeReason" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>开通日期：</td>
-                <td><input name="openTime" class="easyui-validatebox" validType="" required="true"
+                <td><input name="openTime" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>备注：</td>
-                <td><input name="remark" class="easyui-validatebox" validType="" required="true"
+                <td><input name="remark" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>备案号：</td>
-                <td><input name="recordNum" class="easyui-validatebox" validType="" required="true"
+                <td><input name="recordNum" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>备案：</td>
-                <td><input name="inRecord" class="easyui-validatebox" validType="" required="true"
+                <td><input name="inRecord" class="easyui-validatebox" validType=""
+                           style="width: 200px;"></td>
+            </tr>
+            <tr>
+                <td>备案时间：</td>
+                <td><input name="recordDate" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>确认开通：</td>
-                <td><input name="isOpen" class="easyui-validatebox" validType="" required="true"
+                <td><input name="isOpen" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>网站申请编号：</td>
-                <td><input name="webApplyNum" class="easyui-validatebox" validType="" required="true"
+                <td><input name="webApplyNum" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>是否新开：</td>
-                <td><input name="isDisconnect" class="easyui-validatebox" validType="" required="true"
+                <td><input name="isDisconnect" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>备注2：</td>
-                <td><input name="remark2" class="easyui-validatebox" validType="" required="true"
+                <td><input name="remark2" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>访问范围：</td>
-                <td><input name="exploreRange" class="easyui-validatebox" validType="" required="true"
+                <td><input name="exploreRange" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>是否校内域名：</td>
-                <td><input name="isSchoolDomain" class="easyui-validatebox" validType="" required="true"
+                <td><input name="isSchoolDomain" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>是否是数据库：</td>
-                <td><input name="isUseDataBase" class="easyui-validatebox" validType="" required="true"
+                <td><input name="isUseDataBase" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
             <tr>
                 <td>网络状态：</td>
-                <td><input name="webStatue" class="easyui-validatebox" validType="" required="true"
+                <td><input name="webStatue" class="easyui-validatebox" validType=""
                            style="width: 200px;"></td>
             </tr>
         </table>
@@ -324,5 +370,18 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
        onclick="javascript:$('#dlg').dialog('close')">关闭</a>
 </div>
+
+
+<div id="footer">
+    <div id="footMsg">
+        长安大学信息与网络管理处版权所有@2016
+    </div>
+</div>
+
+
+
+
+
 </body>
+</div>
 </html>

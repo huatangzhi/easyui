@@ -2,9 +2,11 @@ CREATE TABLE WebInfo
 (
     webId BIGINT(20) NOT NULL,
     webName VARCHAR(50) NOT NULL,
-    domain VARCHAR(255) NOT NULL,
+    domainName VARCHAR(255) NOT NULL,
+    ipAdress VARCHAR(50),
     departId VARCHAR(20) NOT NULL,
     departIndex VARCHAR(25) NOT NULL,
+    department VARCHAR(20),
     charge VARCHAR(20),
     chargeTel VARCHAR(20),
     administor VARCHAR(20),
@@ -17,17 +19,20 @@ CREATE TABLE WebInfo
     indexOfTeach VARCHAR(20),
     priority VARCHAR(20),
     statue VARCHAR(20),
-    closeTime DATE,
+    closeTime VARCHAR(20),
     closeReason VARCHAR(255),
-    openTime DATE,
+    openTime VARCHAR(20),
     remark VARCHAR(255),
     recordNum VARCHAR(255),
     inRecord VARCHAR(5),
-    confirmOpen VARCHAR(5),
+    recordDate VARCHAR(20),
+    isOpen VARCHAR(20),
+    webApplyNum VARCHAR(20),
+    isDisconnect VARCHAR(20),
     remark2 VARCHAR(255),
     exploreRange VARCHAR(50),
     isSchoolDomain VARCHAR(5),
     isUseDatabase VARCHAR(5),
-    domainStatue VARCHAR(5)
+    webStatue VARCHAR(5)
 );
 CREATE UNIQUE INDEX WebInfo_webId_uindex ON WebInfo (webId);

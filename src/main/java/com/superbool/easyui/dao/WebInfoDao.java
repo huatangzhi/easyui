@@ -77,15 +77,15 @@ public class WebInfoDao {
                         "?,?,?,?)";
 
         int result = jdbcTemplate.update(sql,   webInfo.getWebId(), webInfo.getWebName().trim(), webInfo.getDomainName().trim(),
-                                                webInfo.getIpAdress(), webInfo.getDepartId().trim(), webInfo.getDepartIndex().trim(),
+                                                webInfo.getIpAdress().trim(), webInfo.getDepartId().trim(), webInfo.getDepartIndex().trim(),
                                                 webInfo.getDepartment(),webInfo.getCharge().trim(), webInfo.getChargeTel().trim(),
                                                 webInfo.getAdministor().trim(),
                                                 webInfo.getHouseTel().trim(), webInfo.getMobilePhone().trim(), webInfo.getEmail().trim(),
                                                 webInfo.getQq().trim(), webInfo.getCategory().trim(), webInfo.getClassification().trim(),
                                                 webInfo.getIndexOfTeach().trim(), webInfo.getPriority().trim(), webInfo.getStatue().trim(),
-                                                webInfo.getCloseTime(),
-                                                webInfo.getCloseReason().trim(),webInfo.getOpenTime(), webInfo.getRemark().trim(),
-                                                webInfo.getRecordNum().trim(),webInfo.getInRecord().trim(), webInfo.getRecordDate(),
+                                                webInfo.getCloseTime().trim(),
+                                                webInfo.getCloseReason().trim(),webInfo.getOpenTime().trim(), webInfo.getRemark().trim(),
+                                                webInfo.getRecordNum().trim(),webInfo.getInRecord().trim(), webInfo.getRecordDate().trim(),
                                                 webInfo.getIsOpen().trim(), webInfo.getWebApplyNum().trim(), webInfo.getIsDisconnect().trim(),
                                                 webInfo.getRemark2().trim(),
                                                 webInfo.getExploreRange().trim(), webInfo.getIsSchoolDomain().trim(), webInfo.getIsUseDataBase().trim(),
@@ -93,7 +93,7 @@ public class WebInfoDao {
         return result;
     }
 
-    public int webModify(WebInfo webInfo) throws Exception {
+    public int webModify(WebInfo webInfo, int webId) throws Exception {
 
         String sql = "UPDATE WebInfo webName=?, domainName=?, ipAdress=?, departId=?," +
                 "departIndex=?, department=?, charge = ?, chargeTel = ?, administor = ?," +
@@ -103,7 +103,6 @@ public class WebInfoDao {
                 "recordDate = ?, isOpen = ?, webApplyNum = ?, isDisconnect = ?, remark2 = ?," +
                 "exploreRange = ?, isSchoolDomain = ?, isUseDataBase = ?, webStatue = ? WHERE webId=?";
 
-        WebInfo web = getByWebId(webInfo.getWebId());
 
         int result = jdbcTemplate.update(sql,
                 webInfo.getWebName().trim(), webInfo.getDomainName().trim(), webInfo.getIpAdress().trim(),webInfo.getDepartId().trim(),

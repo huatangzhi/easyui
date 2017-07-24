@@ -26,13 +26,13 @@ public class WebInfo {
     private String indexOfTeach;
     private String priority;
     private String statue;
-    private Date closeTime;
+    private String closeTime;
     private String closeReason;
-    private Date openTime;
+    private String openTime;
     private String remark;
     private String recordNum;
     private String inRecord;
-    private Date recordDate;
+    private String recordDate;
     private String isOpen;
     private String webApplyNum;
     private String isDisconnect;
@@ -194,11 +194,11 @@ public class WebInfo {
         this.statue = statue;
     }
 
-    public Date getCloseTime() {
+    public String getCloseTime() {
         return closeTime;
     }
 
-    public void setCloseTime(Date closeTime) {
+    public void setCloseTime(String closeTime) {
         this.closeTime = closeTime;
     }
 
@@ -210,11 +210,11 @@ public class WebInfo {
         this.closeReason = closeReason;
     }
 
-    public Date getOpenTime() {
+    public String getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(Date openTime) {
+    public void setOpenTime(String openTime) {
         this.openTime = openTime;
     }
 
@@ -242,11 +242,11 @@ public class WebInfo {
         this.inRecord = inRecord;
     }
 
-    public Date getRecordDate() {
+    public String getRecordDate() {
         return recordDate;
     }
 
-    public void setRecordDate(Date recordDate) {
+    public void setRecordDate(String recordDate) {
         this.recordDate = recordDate;
     }
 

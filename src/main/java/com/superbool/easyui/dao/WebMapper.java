@@ -14,7 +14,6 @@ public class WebMapper implements RowMapper<WebInfo>{
     @Override
     public WebInfo mapRow(ResultSet rs, int i) throws SQLException{
         WebInfo webInfo = new WebInfo();
-
         webInfo.setWebId(rs.getInt(1));
         webInfo.setWebName(rs.getString(2));
         webInfo.setDomainName(rs.getString(3));
@@ -34,13 +33,13 @@ public class WebMapper implements RowMapper<WebInfo>{
         webInfo.setIndexOfTeach(rs.getString(17));
         webInfo.setPriority(rs.getString(18));
         webInfo.setStatue(rs.getString(19));
-        webInfo.setCloseTime(rs.getDate(20));
+        webInfo.setCloseTime(rs.getString(20));
         webInfo.setCloseReason(rs.getString(21));
-        webInfo.setOpenTime(rs.getDate(22));
+        webInfo.setOpenTime(rs.getString(22));
         webInfo.setRemark(rs.getString(23));
         webInfo.setRecordNum(rs.getString(24));
         webInfo.setInRecord(rs.getString(25));
-        webInfo.setRecordDate(rs.getDate(26));
+        webInfo.setRecordDate(rs.getString(26));
         webInfo.setIsOpen(rs.getString(27));
         webInfo.setWebApplyNum(rs.getString(28));
         webInfo.setIsDisconnect(rs.getString(29));
@@ -49,7 +48,6 @@ public class WebMapper implements RowMapper<WebInfo>{
         webInfo.setIsSchoolDomain(rs.getString(32));
         webInfo.setIsUseDataBase(rs.getString(33));
         webInfo.setWebStatue(rs.getString(34));
-
         return webInfo;
     }
 }
